@@ -19,7 +19,6 @@ export class AppComponent {
     const zip = new JSZip();
     QR_DATA.forEach((data, index) => {
       if (index >= start && index < end) {
-        console.log(index);
         let temp = this;
         htmlToImage
           .toSvg(document.getElementById(data.ID), { filter: temp.filter })
@@ -51,6 +50,7 @@ export class AppComponent {
   downloadAll() {
     let start = 0;
     let count = 5;
+    console.log('Exporting all files');
     const interval = setInterval(() => {
       this.download(start, start + count);
       start = start + count;
