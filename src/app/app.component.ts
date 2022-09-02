@@ -12,6 +12,10 @@ export class AppComponent {
   name = 'Angular ' + VERSION.major;
   QR_DATA = QR_DATA;
 
+  onQrCodeURL(localUrl, qrCode) {
+    console.log(localUrl, qrCode);
+  }
+
   download() {
     const zip = new JSZip();
     // create a file

@@ -1,4 +1,4 @@
-<div class="qr-code" *ngFor="let a of QR_DATA">
+<div class="qr-code" *ngFor="let a of QR_DATA" (click)="download()">
   <div class="qr-code-wrapper">
     <qrcode
       [qrdata]="a['Full URL']"
@@ -12,6 +12,7 @@
       [scale]="1"
       [title]="'A custom title attribute'"
       [width]="300"
+      (qrCodeURL)="onQrCodeURL($event, a)"
     >
     </qrcode>
     <div class="qr-id">{{ a.ID | uppercase }}</div>
