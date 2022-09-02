@@ -15,7 +15,7 @@ export class AppComponent {
   QR_DATA = QR_DATA;
   qrDataUrls = [];
 
-  download(start = 0, end = 20) {
+  download(start = 0, end = 5) {
     const zip = new JSZip();
     QR_DATA.forEach((data, index) => {
       if (index >= start && index < end) {
@@ -50,15 +50,14 @@ export class AppComponent {
 
   downloadAll() {
     let start = 0;
-    let count = 20;
+    let count = 5;
     const interval = setInterval(() => {
-      // this.download(start, start + count);
-      console.log('hey');
+      this.download(start, start + count);
       start = start + count;
-      console.log(start);
       if (start >= QR_DATA.length) {
+        console.log('Exported all files');
         clearInterval(interval);
       }
-    }, 1000);
+    }, 5000);
   }
 }
