@@ -55,6 +55,10 @@ export class AppComponent {
       // this.download(start, start + count);
       console.log('hey');
       start = start + count;
+      console.log(start);
+      if (start >= QR_DATA.length) {
+        clearInterval(interval);
+      }
     }, 1000);
   }
 }
