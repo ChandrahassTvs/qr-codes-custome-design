@@ -12,27 +12,29 @@ import { toSvg } from 'html-to-image';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  name = 'Angular ' + VERSION.major;
   QR_DATA = QR_DATA;
   qrDataUrls = [];
 
-  download() {
+  download(start = 0, end = 20) {
     const zip = new JSZip();
     QR_DATA.forEach((data, index) => {
-      let temp = this;
-      htmlToImage
-        .toSvg(document.getElementById(data.ID), { filter: temp.filter })
-        .then(function (dataUrl) {
-          temp.qrDataUrls.push({
-            id: data.ID,
-            dataUrl,
+      if (index >= start && index < end) {
+        console.log(index);
+        let temp = this;
+        htmlToImage
+          .toSvg(document.getElementById(data.ID), { filter: temp.filter })
+          .then(function (dataUrl) {
+            temp.qrDataUrls.push({
+              id: data.ID,
+              dataUrl,
+            });
+            var dl = document.createElement('a');
+            document.body.appendChild(dl); // This line makes it work in Firefox.
+            dl.setAttribute('href', dataUrl);
+            dl.setAttribute('download', `${data.ID}.svg`);
+            dl.click();
           });
-          var dl = document.createElement('a');
-          document.body.appendChild(dl); // This line makes it work in Firefox.
-          dl.setAttribute('href', dataUrl);
-          dl.setAttribute('download', `${data.ID}.svg`);
-          dl.click();
-        });
+      }
     });
     // this.qrDataUrls.forEach((data, i) => {
     //   zip.file(`${data.id}.svg`, data.dataUrl);
@@ -44,5 +46,15 @@ export class AppComponent {
   }
   filter(node) {
     return node.tagName !== 'i';
+  }
+
+  downloadAll() {
+    let start = 0;
+    let count = 20;
+    const interval = setInterval(() => {
+      // this.download(start, start + count);
+      console.log('hey');
+      start = start + count;
+    }, 1000);
   }
 }

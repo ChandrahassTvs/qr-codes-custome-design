@@ -16,3 +16,7 @@
 .qr-code-wrapper {
   transform: scale(0.45);
 }
+
+::ng-deep svg path:first-child {
+  fill: transparent;
+}
