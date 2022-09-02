@@ -1,17 +1,19 @@
 <div class="qr-code" *ngFor="let a of QR_DATA">
-  <qrcode
-    [qrdata]="a['Full URL']"
-    [allowEmptyString]="true"
-    [cssClass]="'center'"
-    [colorDark]="'#000000ff'"
-    [colorLight]="'#ffffffff'"
-    [elementType]="'svg'"
-    [errorCorrectionLevel]="'Q'"
-    [margin]="0"
-    [scale]="1"
-    [title]="'A custom title attribute'"
-    [width]="300"
-  >
-  </qrcode>
-  <div class="qr-id">{{ a.ID | uppercase }}</div>
+  <div class="qr-code-wrapper">
+    <qrcode
+      [qrdata]="a['Full URL']"
+      [allowEmptyString]="true"
+      [cssClass]="'center'"
+      [colorDark]="'#000000ff'"
+      [colorLight]="'#ffffffff'"
+      [elementType]="'svg'"
+      [errorCorrectionLevel]="'Q'"
+      [margin]="0"
+      [scale]="1"
+      [title]="'A custom title attribute'"
+      [width]="300"
+    >
+    </qrcode>
+    <div class="qr-id">{{ a.ID | uppercase }}</div>
+  </div>
 </div>
