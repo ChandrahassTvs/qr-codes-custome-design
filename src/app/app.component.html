@@ -1,6 +1,4 @@
-<hello name="{{ name }}"></hello>
-<p>Start editing to see some magic happen :)</p>
-<div *ngFor="let a of QR_DATA">
+<div class="qr-code" *ngFor="let a of QR_DATA">
   <qrcode
     [qrdata]="a['Full URL']"
     [allowEmptyString]="true"
@@ -9,10 +7,11 @@
     [colorLight]="'#ffffffff'"
     [elementType]="'svg'"
     [errorCorrectionLevel]="'Q'"
-    [margin]="4"
+    [margin]="0"
     [scale]="1"
     [title]="'A custom title attribute'"
     [width]="300"
   >
   </qrcode>
+  <div class="qr-id">{{ a.ID | uppercase }}</div>
 </div>
