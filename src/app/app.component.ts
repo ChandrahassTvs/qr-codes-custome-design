@@ -6,7 +6,6 @@ import { SafeUrl } from '@angular/platform-browser';
 import * as htmlToImage from 'html-to-image';
 import { toSvg } from 'html-to-image';
 import { documentToSVG, elementToSVG, inlineResources } from 'dom-to-svg';
-import * as potrace from 'potrace';
 
 @Component({
   selector: 'my-app',
@@ -33,10 +32,6 @@ export class AppComponent {
             // dl.setAttribute('href', dataUrl);
             // dl.setAttribute('download', `${data.ID}.png`);
             // dl.click();
-
-            potrace.trace('./path/to/image.png', function (err, svg) {
-              console.log(svg);
-            });
 
             // console.log(dataUrl.replace(/^data:image\/(png|jpg);base64,/, ''));
             // zip.file(`${data.ID}.png`, dataUrl, { base64: true });
