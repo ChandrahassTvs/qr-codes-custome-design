@@ -44,6 +44,7 @@ export class AppComponent {
         // Get SVG string
         const svgString = new XMLSerializer().serializeToString(svgDocument);
         // zip.file(`${data.ID}.svg`, svgString);
+        console.log(svgDocument, svgString);
       }
     });
 
