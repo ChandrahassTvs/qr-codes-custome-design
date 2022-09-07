@@ -16,26 +16,36 @@ export class AppComponent {
   QR_DATA = QR_DATA;
   qrDataUrls = [];
 
-  download(start = 0, end = 5) {
+  download(start = 0, end = 200) {
     const zip = new JSZip();
-    QR_DATA.forEach(async (data, index) => {
+    QR_DATA.forEach((data, index) => {
       if (index >= start && index < end) {
         let temp = this;
-        htmlToImage
-          .toPng(document.getElementById(data.ID))
-          .then(function (dataUrl) {
-            temp.qrDataUrls.push({
-              id: data.ID,
-              dataUrl,
-            });
-            // var dl = document.createElement('a');
-            // dl.setAttribute('href', dataUrl);
-            // dl.setAttribute('download', `${data.ID}.png`);
-            // dl.click();
+        const xml = elementToSVG(document.getElementById(data.ID));
 
-            // console.log(dataUrl.replace(/^data:image\/(png|jpg);base64,/, ''));
-            // zip.file(`${data.ID}.png`, dataUrl, { base64: true });
-          });
+        let xmlString = new XMLSerializer().serializeToString(
+          xml.documentElement
+        );
+        xmlString = xmlString.replace('36px', '18px');
+        console.log(xmlString);
+        zip.file(`${data.ID}.svg`, xmlString);
+        // htmlToImage
+        //   .toBlob(document.getElementById(data.ID))
+        //   .then(function (dataUrl) {
+        //     temp.qrDataUrls.push({
+        //       id: data.ID,
+        //       dataUrl,
+        //     });
+        //     console.log(dataUrl);
+
+        // var dl = document.createElement('a');
+        // dl.setAttribute('href', dataUrl);
+        // dl.setAttribute('download', `${data.ID}.jpeg`);
+        // dl.click();
+
+        // console.log(dataUrl.replace(/^data:image\/(png|jpg);base64,/, ''));
+        // zip.file(`${data.ID}.png`, dataUrl, { base64: true });
+        // });
         // Capture specific element
         // const svgDocument = elementToSVG(document.getElementById(data.ID));
 
