@@ -6,6 +6,7 @@ import { SafeUrl } from '@angular/platform-browser';
 import * as htmlToImage from 'html-to-image';
 import { toSvg } from 'html-to-image';
 import { documentToSVG, elementToSVG, inlineResources } from 'dom-to-svg';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'my-app',
@@ -20,15 +21,14 @@ export class AppComponent {
     const zip = new JSZip();
     QR_DATA.forEach((data, index) => {
       if (index >= start && index < end) {
-        let temp = this;
         const xml = elementToSVG(document.getElementById(data.ID));
-
         let xmlString = new XMLSerializer().serializeToString(
           xml.documentElement
         );
-        xmlString = xmlString.replace('36px', '18px');
-        console.log(xmlString);
+        xmlString = xmlString.replace('36px', '16px');
+        // console.log(xmlString);
         zip.file(`${data.ID}.svg`, xmlString);
+
         // htmlToImage
         //   .toBlob(document.getElementById(data.ID))
         //   .then(function (dataUrl) {
@@ -59,7 +59,7 @@ export class AppComponent {
       }
     });
     zip.generateAsync({ type: 'blob' }).then(function (content) {
-      saveAs(content, 'qr-codes.zip');
+      saveAs(content, 'qr-codes-svg-with-img-qr.zip');
     });
   }
   filter(node) {
